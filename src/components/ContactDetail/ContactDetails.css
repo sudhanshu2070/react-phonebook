@@ -1,0 +1,49 @@
+/* ContactDetails.css */
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+  
+  .card-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .card-body p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 16px;
+  }
+  
+  .card-body p strong {
+    color: #000;
+  }
+  
+  /* Style for the list of contact cards */
+  .contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .contact-list .card {
+    margin: 10px;
+  }  
