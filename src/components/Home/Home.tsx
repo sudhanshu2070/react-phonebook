@@ -4,23 +4,46 @@ import './Home.css'; // Import the CSS file
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const [contactId, setContactId] = useState<string>(''); // Default to '' to display all contacts initially
+  const [contactId, setContactId] = useState<string>(''); // State to hold the entered contact ID
+
+  const handleAddContact = () => {
+    navigate('/add-contact');
+  };
+
+  const handleViewContacts = () => {
+    navigate('/contact/'); // Navigates to the page displaying all contacts
+  };
+
+  const handleViewContactDetails = () => {
+    if (contactId.trim()) {
+      navigate(`/contact/${contactId}`); // Navigates to the specific contact details
+    } else {
+      navigate('/contact/');
+    }
+  };
 
   return (
-    <div className="container">
-      <h1 className="heading">Welcome to the Contact Book</h1>
-      <div>
-        <button className="button" onClick={() => navigate('/add-contact')}>Add Contact</button>
-        <div className="input-container">
+    <div className="home-container">
+      <h1>Welcome to the Contact Book</h1>
+      <div className="button-container">
+        <button className="home-btn" onClick={handleAddContact}>
+          Add Contact
+        </button>
+        <div className="view-contact-section">
           <input
-            className="input-field"
             type="number"
             value={contactId}
             onChange={(e) => setContactId(e.target.value)}
             placeholder="Enter Contact ID"
+            className="contact-id-input"
           />
-          <button className="button" onClick={() => navigate(`/contact/${contactId}`)}>View Contact Details</button>
+          <button className="home-btn" onClick={handleViewContactDetails}>
+            View Contact Details
+          </button>
         </div>
+        <button className="home-btn" onClick={handleViewContacts}>
+          View All Contacts
+        </button>
       </div>
     </div>
   );

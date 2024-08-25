@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/add-contact" element={<AddContact />} />
         <Route path="/contact/:id" element={<ContactDetails contacts={contacts} />} />
         <Route path="/contact" element={<ContactDetails contacts={contacts} />} /> {/* Handle the case with no ID */}

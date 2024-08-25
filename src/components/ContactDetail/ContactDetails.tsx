@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-//import contacts from '../contact-detail'; // Adjust the path as needed
 import './ContactDetails.css'; // Import the CSS file
 
 interface Contact {
