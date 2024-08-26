@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import './ContactDetails.css'; // Import the CSS file
 
 interface Contact {
-  id: number;
+  _id: string;
   name: string;
   phone: string;
   email: string;
@@ -13,58 +14,80 @@ interface Contact {
   dob: string;
 }
 
-interface ContactDetailsProps {
-  contacts: Contact[];
-}
+const ContactDetails: React.FC = () => {
+  const { name } = useParams<{ name?: string }>();
+  //const [contact, setContact] = useState<Contact | null>(null);
+  const [contacts, setContacts] = useState<Contact []| null>(null);
 
-const ContactDetails: React.FC<ContactDetailsProps> = ({ contacts }) => {
-  const { id } = useParams<{ id?: string }>();
+  const [error, setError] = useState<string | null>(null);
 
-  if (id) {
-    const contactId = parseInt(id, 10);
-    const contact = contacts.find(contact => contact.id === contactId);
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+       console.log("Fetching data...");
 
-    if (contact) {
-      return (
-        <div className="card">
-        <div className="card-header">
-          <h2>{contact.name}</h2>
-        </div>
-        <div className="card-body">
-          <p><strong>Phone:</strong> {contact.phone}</p>
-          <p><strong>Email:</strong> {contact.email}</p>
-          <p><strong>Address:</strong> {contact.address}</p>
-          <p><strong>Job Title:</strong> {contact.jobTitle}</p>
-          <p><strong>Company:</strong> {contact.company}</p>
-          <p><strong>Date of Birth:</strong> {contact.dob}</p>
-        </div>
-      </div>
-      );
-    } else {
-      return <p>No contact found.</p>;
-    }
-  } else {
-    return (
-      <div>
-        <h2>All Contacts</h2>
-        {contacts.length > 0 ? (
-          contacts.map(contact => (
-            <div key={contact.id} className="card">
-              <h3>{contact.name}</h3>
-              <p>Phone: {contact.phone}</p>
-              <p>Email: {contact.email}</p>
-              <p>Address: {contact.address}</p>
-              <p>Job Title: {contact.jobTitle}</p>
-              <p>Company: {contact.company}</p>
-              <p>Date of Birth: {contact.dob}</p>
-            </div>
-          ))
-        ) : (
-          <p>No contacts available.</p>
-        )}
-      </div>
-    );
+       let response;
+       
+       if (name) {
+         console.log("Fetching contact by name:", name);
+         response = await axios.get(`http://localhost:5000/api/contacts?name=${name}`);
+       } 
+       else if(name === '' || name === null) {
+         console.log("Fetching all contacts");
+         response = await axios.get('http://localhost:5000/api/contacts');
+       }
+       else{
+        response = await axios.get('http://localhost:5000/api/contacts');
+       }
+
+      if (response.data.length > 0) {
+          setContacts(response.data); // Assuming response is an array
+          setError(null); // Clear any previous errors
+        } 
+        else 
+        {
+          setError('No contact found.');
+        }
+      } 
+      catch (error) {
+        setError('Error fetching contact details.');
+        console.error('Error fetching contact details:', error);
+      }
+    };
+
+    fetchContact();
+  }, [name]);
+
+  if (error) {
+    return <p>{error}</p>;
   }
+
+  if (!contacts) {
+    return <p>Loading...</p>;
+  }
+
+
+  const renderContactCard = (contact:any)  =>(   
+    <div className="card">
+    <div className="card-header">
+      <h2>{contact.name}</h2>
+    </div>
+    <div className="card-body">
+      <p><strong>Phone:</strong> {contact.phone}</p>
+      <p><strong>Email:</strong> {contact.email}</p>
+      <p><strong>Address:</strong> {contact.address}</p>
+      <p><strong>Job Title:</strong> {contact.jobTitle}</p>
+      <p><strong>Company:</strong> {contact.company}</p>
+      <p><strong>Date of Birth:</strong> {contact.dob}</p>
+    </div>
+  </div>
+  );
+
+  if (contacts.length > 0) {
+    return <div>{contacts.map(renderContactCard)}</div>;
+  }
+
+  return <div>No contacts found.</div>;
 };
 
 export default ContactDetails;
