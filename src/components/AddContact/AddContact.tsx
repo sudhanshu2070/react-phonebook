@@ -14,6 +14,8 @@ const AddContact: React.FC = () => {
     dob: ''
   });
 
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,15 +25,21 @@ const AddContact: React.FC = () => {
     });
   };
 
-  const handleSubmit = () => {
-    axios.post('http://localhost:5000/api/contacts', formData)
-      .then(() => {
-        navigate('/');
-      })
-      .catch(error => {
-        console.error("There was an error adding the contact!", error);
-      });
+  const handleSubmit = async () => {
+    try {
+      await axios.post('http://localhost:5000/api/contacts', formData);
+      console.log("Added");
+      setSuccessMessage('Contact added successfully.');
+      setTimeout(() => {
+        setSuccessMessage(null);
+        navigate('/'); // Navigate after hiding the message
+      }, 1000); // Delay navigation for 1 seconds to allow message to be visible
+    } catch (error) {
+      console.error("There was an error adding the contact!", error);
+      setError('Failed to add the contact.');
+    }
   };
+  
 
   return (
     <div className="add-contact-container">
@@ -65,6 +73,17 @@ const AddContact: React.FC = () => {
         <input type="date" name="dob" value={formData.dob} onChange={handleChange} placeholder="Date of Birth" />
       </div>
       <button onClick={handleSubmit}>Add Contact</button>
+
+      {/* Display Success Message */}
+      {successMessage && (
+        <div className="success-message-container">
+          <p className="success-message">{successMessage}</p>
+        </div>
+      )}
+
+      {/* Render Error Message */}
+      {error && <p>{error}</p>}
+
     </div>
   );
 };

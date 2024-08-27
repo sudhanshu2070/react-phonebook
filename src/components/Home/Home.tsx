@@ -44,26 +44,30 @@ const Home: React.FC = () => {
  
   return (
     <div className="home-container">
-      <h1>Welcome to the Contact Book</h1>
+      <h1>Welcome to the Telephone Directory</h1>
       <div className="button-container">
-        <button className="home-btn" onClick={handleAddContact}>
-          Add Contact
-        </button>
+        <div className="left-container">
+          <button className="home-btn" onClick={handleAddContact}>
+            Add Contact
+          </button>
+        </div>
         <div className="view-contact-section">
           <input
             type="text"
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
-            placeholder="Enter Contact Name"
+            placeholder="Enter Contact Name to search"
             className="contact-name-input"
           />
           <button className="home-btn" onClick={handleViewContactDetails}>
             View Contact Details
           </button>
         </div>
-        <button className="home-btn" onClick={handleViewContacts}>
-          View All Contacts
-        </button>
+        <div className="bottom-container">
+          <button className="home-btn" onClick={handleViewContacts}>
+            View All Contacts
+          </button>
+        </div>
       </div>
     </div>
   );

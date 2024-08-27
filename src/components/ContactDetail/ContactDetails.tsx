@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
+
 import './ContactDetails.css'; // Import the CSS file
 
 interface Contact {
@@ -18,8 +20,11 @@ const ContactDetails: React.FC = () => {
   const { name } = useParams<{ name?: string }>();
   //const [contact, setContact] = useState<Contact | null>(null);
   const [contacts, setContacts] = useState<Contact []| null>(null);
-
+  const [contactToDelete, setContactToDelete] = useState<Contact | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -58,6 +63,46 @@ const ContactDetails: React.FC = () => {
     fetchContact();
   }, [name]);
 
+
+
+  const deleteContact = async (id: string) => {
+
+    // const confirmDelete = window.confirm("Are you sure you want to delete this contact?");
+  
+    // if (!confirmDelete) {
+    //   return; // If the user cancels, exit the function
+    // }
+
+    try {
+      await axios.delete(`http://localhost:5000/api/contacts/${id}`);
+      setContacts(contacts?.filter(contact => contact._id !== id) || null);
+      setIsModalVisible(false);
+       setSuccessMessage('Contact deleted successfully.');
+       setTimeout(() => setSuccessMessage(null), 3000); // Hide message after 3 seconds
+    } catch (error) {
+      console.error('Error deleting contact:', error);
+      setError('Failed to delete the contact.');
+    }
+  };
+
+
+    const handleDeleteClick = (contact: Contact) => {
+    setContactToDelete(contact);
+    setIsModalVisible(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (contactToDelete) {
+      deleteContact(contactToDelete._id);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setIsModalVisible(false);
+    setContactToDelete(null);
+  };
+
+
   if (error) {
     return <p>{error}</p>;
   }
@@ -67,10 +112,17 @@ const ContactDetails: React.FC = () => {
   }
 
 
-  const renderContactCard = (contact:any)  =>(   
-    <div className="card">
+  const renderContactCard = (contact:Contact)  =>(   
+    <div className="card" key={contact._id}>
     <div className="card-header">
       <h2>{contact.name}</h2>
+      <i
+        className="bi bi-person-fill-slash delete-icon icon-large"
+        //onClick={() => deleteContact(contact._id)}
+         //onClick={() => setContactToDelete(contact._id)}
+         onClick={() => handleDeleteClick(contact)}
+        title="Delete Contact"
+      ></i>
     </div>
     <div className="card-body">
       <p><strong>Phone:</strong> {contact.phone}</p>
@@ -84,10 +136,27 @@ const ContactDetails: React.FC = () => {
   );
 
   if (contacts.length > 0) {
-    return <div>{contacts.map(renderContactCard)}</div>;
+    return <div>
+   
+   {successMessage && (
+        <div className="success-message-container">
+          <p className="success-message">{successMessage}</p>
+        </div>
+      )}
+
+    {contacts.map(renderContactCard)}
+      {isModalVisible && contactToDelete && (
+        <DeleteConfirmationModal
+          contactName={contactToDelete.name} // Pass contactName here
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
+    </div>;
   }
 
   return <div>No contacts found.</div>;
+
 };
 
 export default ContactDetails;

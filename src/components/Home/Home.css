@@ -1,32 +1,97 @@
 .home-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ece9e6, #ffffff); /* Soft gradient background */
+  font-family: 'Arial', sans-serif;
+  color: #333;
   text-align: center;
 }
 
 h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 2.5rem;
+  color: #2c3e50; /* Rich dark color for text */
+  margin-bottom: 30px;
 }
 
 .button-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.left-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.right-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bottom-container {
+  display: flex;
+  justify-content: center;
 }
 
 .home-btn {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 15px 25px;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Rich gradient background */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 1em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 .home-btn:hover {
-  background-color: #0056b3;
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+.view-contact-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.contact-name-input {
+  padding: 12px 20px;
+  border: 2px solid #ff7e5f; /* Border color matching button */
+  border-radius: 25px;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s ease; /* Smooth transition */
+}
+
+.contact-name-input:focus {
+  border-color: #feb47b; /* Change border color on focus */
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 20px;
+  }
+
+  .home-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .contact-name-input {
+    font-size: 0.9rem;
+  }
 }

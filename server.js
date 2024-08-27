@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const port = 5000; // Server runs on port 5000 
@@ -78,6 +79,26 @@ app.post('/api/contacts', async (req, res) => {
   res.json(newContact);
 });
 
+// DELETE route to delete a contact by ID
+app.delete('/api/contacts/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Find and delete the contact
+    const result = await Contact.findByIdAndDelete(id);
+
+    if (result) {
+      // Contact was found and deleted
+      res.status(200).json({ message: 'Contact deleted successfully' });
+    } else {
+      // Contact with that ID was not found
+      res.status(404).json({ message: 'Contact not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    res.status(500).json({ message: 'Error deleting contact' });
+  }
+});
 
 // Start the server
 app.listen(5000, () => {
