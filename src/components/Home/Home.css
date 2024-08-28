@@ -1,18 +1,45 @@
 .home-container {
+  position: relative;
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #ece9e6, #ffffff); /* Soft gradient background */
-  font-family: 'Arial', sans-serif;
-  color: #333;
-  text-align: center;
+  align-items: center;
+  /* background: #a28089; Dark Sand as a fallback color */
 }
 
-h1 {
+.background-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.background-layer.layer-one {
+  background: repeating-linear-gradient(to right, #EEEEEE, #76ABAE 3px);
+  clip-path: polygon(0 0, 25% 0, 25% 100%, 0 100%);
+}
+
+.background-layer.layer-two {
+  background: repeating-linear-gradient(to right,#76ABAE, #31363F 3px);
+  clip-path: polygon(50% 0, 25% 0, 25% 100%, 50% 100%);
+}
+
+.background-layer.layer-three {
+  background: repeating-linear-gradient(to right, #31363F, #222831 3px);
+  clip-path: polygon(50% 0, 75% 0, 75% 100%, 50% 100%);
+} 
+
+.background-layer.layer-four {
+  background: repeating-linear-gradient(to right, #222831, #000100 3px);
+  clip-path: polygon(100% 0, 75% 0, 75% 100%, 100% 100%);
+}
+
+.home-container h1 {
   font-size: 2.5rem;
-  color: #2c3e50; /* Rich dark color for text */
+  color: #040404;
   margin-bottom: 30px;
 }
 
@@ -40,10 +67,14 @@ h1 {
 }
 
 .home-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 15px 25px;
   border: none;
   border-radius: 50px;
-  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Rich gradient background */
+  background: #262626; /* Button color */
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -53,6 +84,7 @@ h1 {
 }
 
 .home-btn:hover {
+  background-color: #628078;
   transform: scale(1.05); /* Slight zoom effect on hover */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
 }
@@ -68,7 +100,7 @@ h1 {
 
 .contact-name-input {
   padding: 12px 20px;
-  border: 2px solid #ff7e5f; /* Border color matching button */
+  border: 2px solid #607D8B; /* Border color matching button */
   border-radius: 25px;
   outline: none;
   font-size: 1rem;
@@ -78,7 +110,7 @@ h1 {
 }
 
 .contact-name-input:focus {
-  border-color: #feb47b; /* Change border color on focus */
+  border-color: #455A64; /* Darker border color on focus for better visibility */
 }
 
 @media (max-width: 768px) {
