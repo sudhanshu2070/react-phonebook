@@ -14,6 +14,7 @@ interface Contact {
   jobTitle: string;
   company: string;
   dob: string;
+  quote:string;
 }
 
 const ContactDetails: React.FC = () => {
@@ -131,6 +132,7 @@ const ContactDetails: React.FC = () => {
       <p><strong>Job Title:</strong> {contact.jobTitle}</p>
       <p><strong>Company:</strong> {contact.company}</p>
       <p><strong>Date of Birth:</strong> {contact.dob}</p>
+      <p><strong>Quote to live by:</strong> {contact.quote}</p>
     </div>
   </div>
   );

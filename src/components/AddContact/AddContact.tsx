@@ -11,12 +11,16 @@ const AddContact: React.FC = () => {
     address: '',
     jobTitle: '',
     company: '',
-    dob: ''
+    dob: '',
+    quote:''
   });
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const image = "./images/ben-bouvier-farrell.jpg"; //public\images\ben-bouvier-farrell.jpg
+  const bgdImgContactDtl = "./images/philippe-mignot.jpg" //public\images\ben-bouvier-farrell.jpg
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -39,50 +43,67 @@ const AddContact: React.FC = () => {
       setError('Failed to add the contact.');
     }
   };
-  
 
   return (
-    <div className="add-contact-container">
-      <h1>Add Contact</h1>
-      <div className="input-group">
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="phone">Phone</label>
-        <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="address">Address</label>
-        <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Address" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="jobTitle">Job Title</label>
-        <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleChange} placeholder="Job Title" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="company">Company</label>
-        <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Company" />
-      </div>
-      <div className="input-group">
-        <label htmlFor="dob">Date of Birth</label>
-        <input type="date" name="dob" value={formData.dob} onChange={handleChange} placeholder="Date of Birth" />
-      </div>
-      <button onClick={handleSubmit}>Add Contact</button>
 
-      {/* Display Success Message */}
+    <div className="page-background"  style={{backgroundImage:`url(${bgdImgContactDtl})`}}>
+
+    <div className="add-contact-container" style={{ backgroundImage:`url(${image})` }}>
+
+      <div className='add-contact-title-background' style={{ backgroundImage:`url(${image})` }}>
+
+      <h1 className="add-contact-title">Add New Contact</h1>
+      
+      </div>
+
+        <div className="add-contact-input-group">
+          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
+        </div>
+
+        <div className="add-contact-input-group">
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" />
+        </div>
+
+        <div className="add-contact-input-group">
+          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" />
+        </div>
+          
+        <div className='add-contact-input-row'>
+
+        <div className="add-contact-input-group">
+          <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleChange} placeholder="Job Title" />
+        </div>
+
+        <div className="add-contact-input-group">
+          <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Company" />
+        </div>
+        
+        </div>
+
+        <div className="add-contact-input-group">
+          <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Home Address" />
+        </div>
+
+        <div className="add-contact-input-group">
+          <input type="date" name="dob" value={formData.dob} onChange={handleChange} placeholder="Date of Birth" />
+        </div>
+
+        <div className="add-contact-input-group">
+          <input type="text" name="quote" value={formData.quote} onChange={handleChange} placeholder="Quote to live by..." />
+        </div>
+
+        <button onClick={handleSubmit} className="add-contact-button">
+          Add Contact
+        </button>
+
       {successMessage && (
-        <div className="success-message-container">
-          <p className="success-message">{successMessage}</p>
+        <div className="add-contact-success-message-container">
+          <p className="add-contact-success-message">{successMessage}</p>
         </div>
       )}
 
-      {/* Render Error Message */}
-      {error && <p>{error}</p>}
+      {error && <p className="add-contact-error-message">{error}</p>}
+    </div>
 
     </div>
   );

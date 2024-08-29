@@ -29,6 +29,7 @@ const ContactSchema = new mongoose.Schema({
   jobTitle: String,
   company: String,
   dob: String,
+  quote:String,
 });
 
 const Contact = mongoose.model('contacts', ContactSchema); // Specify the 'contacts' collection explicitly
@@ -64,7 +65,7 @@ app.get('/api/test', (req, res) => {
 });
 
 app.post('/api/contacts', async (req, res) => {
-  const {name, phone, email, address, jobTitle, company, dob} = req.body;
+  const {name, phone, email, address, jobTitle, company, dob, quote} = req.body;
   
   const newContact = new Contact({
     name,
@@ -73,7 +74,8 @@ app.post('/api/contacts', async (req, res) => {
     address,
     jobTitle,
     company, 
-    dob
+    dob,
+    quote
   });
   await newContact.save();
   res.json(newContact);

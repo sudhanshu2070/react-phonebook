@@ -89,6 +89,18 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
 }
 
+button {
+  padding: 12px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+} 
+
 .view-contact-section {
   display: flex;
   flex-direction: row;

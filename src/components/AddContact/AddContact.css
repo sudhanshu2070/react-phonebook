@@ -1,101 +1,92 @@
-/* AddContact.css */
-.add-contact-container {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  margin: 40px auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center;
-}
-
-.input-group {
-  margin-bottom: 15px;
+.page-background {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Ensures background image stays in place during scrolling */
+  height: 100vh; /* Full viewport height */
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
-.input-group label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
-.input-group input {
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  transition: border-color 0.3s ease;
-}
-
-.input-group input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-button {
-  padding: 12px 20px;
-  font-size: 1em;
-  color: white;
-  background-color: #28a745;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #218838;
-}
-
-button:active {
-  background-color: #1e7e34;
-}
 .add-contact-container {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
+  max-width: 28%;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background-size: cover; /* Ensures the image covers the entire form */
+  background-position: center;
+  color: #333;
+  position: relative; /* Positioning for the container */
+  z-index: 1; /* Ensures form content is above the background */
 }
 
-.input-group {
-  margin-bottom: 15px;
-}
-
-.input-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input-group input {
+.add-contact-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3; /* Control the opacity of the background image */
+  z-index: -1; /* Places the background image behind the form content */
+  border-radius: 10px; /* Matches the form's border-radius */
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50; /* Green */
+.add-contact-title {
+  font-family: 'Papyrus';
+  margin-top: 0.5rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  font-size: 2.35rem;
+  color: #007bff;
+  font-weight:1000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.add-contact-input-group {
+  flex:1;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.add-contact-input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.add-contact-button {
+  padding: 1rem;
+  background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background-color: #45a049;
+.add-contact-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
+.add-contact-input-row {
+  display: flex;
+  gap: 0.5rem; /* Space between inputs */
+  margin-bottom: 0.5 rem;
+}
 
-.success-message-container {
+.add-contact-success-message-container {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -103,7 +94,7 @@ button:hover {
   pointer-events: none;
 }
 
-.success-message {
+.add-contact-success-message {
   background-color: #4CAF50; /* Green */
   color: white;
   padding: 15px;
@@ -114,19 +105,3 @@ button:hover {
   opacity: 1;
   animation: fade-in-out 3s ease-in-out;
 }
-
-@keyframes fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
