@@ -21,6 +21,7 @@ const AddContact: React.FC = () => {
 
   const image = "./images/ben-bouvier-farrell.jpg"; //public\images\ben-bouvier-farrell.jpg
   const bgdImgContactDtl = "./images/philippe-mignot.jpg" //public\images\ben-bouvier-farrell.jpg
+  // const bgdImgContactTitle = "./images/tim-navis.jpg" //public\images\ben-bouvier-farrell.jpg
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -50,11 +51,7 @@ const AddContact: React.FC = () => {
 
     <div className="add-contact-container" style={{ backgroundImage:`url(${image})` }}>
 
-      <div className='add-contact-title-background' style={{ backgroundImage:`url(${image})` }}>
-
       <h1 className="add-contact-title">Add New Contact</h1>
-      
-      </div>
 
         <div className="add-contact-input-group">
           <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />

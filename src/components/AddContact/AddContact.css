@@ -43,9 +43,9 @@
   text-align: center;
   margin-bottom: 1.25rem;
   font-size: 2.35rem;
-  color: #007bff;
+  color: #0b0705; /*#020403; different shade of black*/
   font-weight:1000;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .add-contact-input-group {
@@ -64,10 +64,15 @@
 }
 
 .add-contact-button {
+  font-family: 'Libre Baskerville', serif; /* Apply Libre Baskerville font */
+  text-shadow: .07em .07em 0 #FF3743, .1em .1em 0 white;
+  text-transform: capitalize;
+  letter-spacing: .1em; 
+
   padding: 1rem;
-  background-color: #28a745;
+  background-color: rgba(4, 2, 0, 0.4); /* Adjusted to add transparency */
   color: white;
-  border: none;
+  border: 1.5px solid #737474;
   border-radius: 8px;
   font-size: 1.2rem;
   font-weight: bold;
@@ -76,8 +81,13 @@
 }
 
 .add-contact-button:hover {
-  background-color: #218838;
-  transform: scale(1.05);
+  font-family: 'Libre Baskerville', serif; /* Apply Libre Baskerville font */
+  text-shadow: none;
+  letter-spacing: none;
+  font-size: 1.25rem;
+  background-color: #AFAFAF;
+  color: #020403;
+  transform: scale(1.03);
 }
 
 .add-contact-input-row {
@@ -95,7 +105,7 @@
 }
 
 .add-contact-success-message {
-  background-color: #4CAF50; /* Green */
+  background-color: #AFAFAF; /* Green */
   color: white;
   padding: 15px;
   border-radius: 5px;
