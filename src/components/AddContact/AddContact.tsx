@@ -47,7 +47,7 @@ const AddContact: React.FC = () => {
 
   return (
 
-    <div className="page-background"  style={{backgroundImage:`url(${bgdImgContactDtl})`}}>
+    <div className="page-background"  style={{backgroundImage:`url(${bgdImgContactDtl})`}} >
 
     <div className="add-contact-container" style={{ backgroundImage:`url(${image})` }}>
 

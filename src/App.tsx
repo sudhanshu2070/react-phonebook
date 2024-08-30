@@ -17,20 +17,20 @@ const App: React.FC = () => {
 };
 
 const AnimatedRoutes: React.FC = () => {
+  
   const location = useLocation();
 
   return (
-    <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Transitions> <Home /></Transitions> }/>
-        <Route path="/add-contact" element={ <Transitions> <AddContact /> </Transitions> } />
-        <Route path="/contact/:name" element={ <Transitions> <ContactDetails /> </Transitions>} />
-        {/*handling the case where no contact name is provided */}
-        <Route path="/contact/" element={ <Transitions> <ContactDetails /> </Transitions> } />
-      </Routes>
-    </AnimatePresence>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Transitions> <Home /></Transitions> }/>
+          <Route path="/add-contact" element={ <Transitions> <AddContact /> </Transitions> } />
+          <Route path="/contact/:name" element={ <Transitions> <ContactDetails /> </Transitions>} />
+          {/*handling the case where no contact name is provided */}
+          <Route path="/contact/" element={ <Transitions> <ContactDetails /> </Transitions> } />
+        </Routes>
+      </AnimatePresence>
   );
 };
-
 
 export default App;
