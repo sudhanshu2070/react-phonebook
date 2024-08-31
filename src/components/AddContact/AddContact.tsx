@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './AddContact.css'; // Import the cool CSS
+import useLazyBackgroundImage from '../../hooks/useLazyBackgroundImage';
 
 const AddContact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -19,9 +20,8 @@ const AddContact: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const image = "./images/ben-bouvier-farrell.jpg"; //public\images\ben-bouvier-farrell.jpg
-  const bgdImgContactDtl = "./images/philippe-mignot.jpg" //public\images\ben-bouvier-farrell.jpg
-  // const bgdImgContactTitle = "./images/tim-navis.jpg" //public\images\ben-bouvier-farrell.jpg
+  const pagebgImg = "./images/philippe-mignot.jpg";
+  const addContactBgImg = "./images/ben-bouvier-farrell.jpg"; 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -33,7 +33,6 @@ const AddContact: React.FC = () => {
   const handleSubmit = async () => {
     try {
       await axios.post('http://localhost:5000/api/contacts', formData);
-      console.log("Added");
       setSuccessMessage('Contact added successfully.');
       setTimeout(() => {
         setSuccessMessage(null);
@@ -45,63 +44,66 @@ const AddContact: React.FC = () => {
     }
   };
 
+
+  const [pageBgImage, pageBgRef] = useLazyBackgroundImage('./images/philippe-mignot.jpg', pagebgImg);
+  const [contactBgImage, contactBgRef] = useLazyBackgroundImage('./images/ben-bouvier-farrell.jpg', addContactBgImg);
+
   return (
 
-    <div className="page-background"  style={{backgroundImage:`url(${bgdImgContactDtl})`}} >
+    <div className="page-background" ref={pageBgRef} style={{ backgroundImage: `url(${pageBgImage})` }}>
+      <div className="add-contact-container" ref={contactBgRef} style={{ backgroundImage: `url(${contactBgImage})` }}>
 
-    <div className="add-contact-container" style={{ backgroundImage:`url(${image})` }}>
+        <h1 className="add-contact-title">Add New Contact</h1>
 
-      <h1 className="add-contact-title">Add New Contact</h1>
-
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
-        </div>
+          </div>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" />
-        </div>
+          </div>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" />
-        </div>
+          </div>
           
-        <div className='add-contact-input-row'>
+          <div className='add-contact-input-row'>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleChange} placeholder="Job Title" />
-        </div>
+          </div>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Company" />
-        </div>
-        
-        </div>
+          </div>
+          
+          </div>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Home Address" />
-        </div>
+          </div>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="date" name="dob" value={formData.dob} onChange={handleChange} placeholder="Date of Birth" />
-        </div>
+          </div>
 
-        <div className="add-contact-input-group">
+          <div className="add-contact-input-group">
           <input type="text" name="quote" value={formData.quote} onChange={handleChange} placeholder="Quote to live by..." />
-        </div>
+          </div>
 
-        <button onClick={handleSubmit} className="add-contact-button">
-          Add Contact
-        </button>
+          <button onClick={handleSubmit} className="add-contact-button">
+            Add Contact
+          </button>
 
-      {successMessage && (
-        <div className="add-contact-success-message-container">
-          <p className="add-contact-success-message">{successMessage}</p>
-        </div>
-      )}
+          {successMessage && (
+            <div className="add-contact-success-message-container">
+              <p className="add-contact-success-message">{successMessage}</p>
+            </div>
+          )}
 
-      {error && <p className="add-contact-error-message">{error}</p>}
-    </div>
+          {error && <p className="add-contact-error-message">{error}</p>}
 
+      </div>
     </div>
   );
 };

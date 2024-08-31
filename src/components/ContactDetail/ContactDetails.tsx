@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
-
 import './ContactDetails.css'; // Import the CSS file
 
 interface Contact {
@@ -21,6 +21,7 @@ const ContactDetails: React.FC = () => {
   const { name } = useParams<{ name?: string }>();
   //const [contact, setContact] = useState<Contact | null>(null);
   const [contacts, setContacts] = useState<Contact []| null>(null);
+  const [loading, setLoading] = useState(true); // Loading state
   const [contactToDelete, setContactToDelete] = useState<Contact | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,16 +31,12 @@ const ContactDetails: React.FC = () => {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-       console.log("Fetching data...");
-
        let response;
        
        if (name) {
-         console.log("Fetching contact by name:", name);
          response = await axios.get(`http://localhost:5000/api/contacts?name=${name}`);
        } 
        else if(name === '' || name === null) {
-         console.log("Fetching all contacts");
          response = await axios.get('http://localhost:5000/api/contacts');
        }
        else{
@@ -47,8 +44,8 @@ const ContactDetails: React.FC = () => {
        }
 
       if (response.data.length > 0) {
-          setContacts(response.data); // Assuming response is an array
-          setError(null); // Clear any previous errors
+          setContacts(response.data); // If the response is an array
+          setError(null); // Clearing any previous errors
         } 
         else 
         {
@@ -59,11 +56,13 @@ const ContactDetails: React.FC = () => {
         setError('Error fetching contact details.');
         console.error('Error fetching contact details:', error);
       }
+      finally{
+        setLoading(false); // Set loading to false after the fetch is complete
+      }
     };
 
     fetchContact();
   }, [name]);
-
 
 
   const deleteContact = async (id: string) => {
@@ -87,7 +86,7 @@ const ContactDetails: React.FC = () => {
   };
 
 
-    const handleDeleteClick = (contact: Contact) => {
+  const handleDeleteClick = (contact: Contact) => {
     setContactToDelete(contact);
     setIsModalVisible(true);
   };
@@ -104,61 +103,66 @@ const ContactDetails: React.FC = () => {
   };
 
 
+  if (loading) {
+    // Rendering multiple skeleton loaders while loading
+    return (
+      <div>
+        {[...Array(5)].map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
+      </div>
+    );
+  }
+
+
   if (error) {
     return <p>{error}</p>;
   }
 
-  if (!contacts) {
-    return <p>Loading...</p>;
-  }
+  if (contacts && contacts.length > 0) {
+    return (
+      <div>
+        {successMessage && (
+          <div className="success-message-container">
+            <p className="success-message">{successMessage}</p>
+          </div>
+        )}
 
+        {contacts.map((contact,index) => (
+          <div className="card" key={contact._id}>
 
-  const renderContactCard = (contact:Contact)  =>(   
-    <div className="card" key={contact._id}>
-    <div className="card-header">
-      <h2>{contact.name}</h2>
-      <i
-        className="bi bi-person-fill-slash delete-icon icon-large"
-        //onClick={() => deleteContact(contact._id)}
-         //onClick={() => setContactToDelete(contact._id)}
-         onClick={() => handleDeleteClick(contact)}
-        title="Delete Contact"
-      ></i>
-    </div>
-    <div className="card-body">
-      <p><strong>Phone:</strong> {contact.phone}</p>
-      <p><strong>Email:</strong> {contact.email}</p>
-      <p><strong>Address:</strong> {contact.address}</p>
-      <p><strong>Job Title:</strong> {contact.jobTitle}</p>
-      <p><strong>Company:</strong> {contact.company}</p>
-      <p><strong>Date of Birth:</strong> {contact.dob}</p>
-      <p><strong>Quote to live by:</strong> {contact.quote}</p>
-    </div>
-  </div>
-  );
+            <div className="card-header">
+              <h2>{contact.name}</h2>
+              <i
+                className="bi bi-person-fill-slash delete-icon icon-large"
+                onClick={() => handleDeleteClick(contact)}
+                title="Delete Contact"
+              ></i>
+            </div>
+            <div className="card-body">
+              <p><strong>Phone:</strong> {contact.phone}</p>
+              <p><strong>Email:</strong> {contact.email}</p>
+              <p><strong>Address:</strong> {contact.address}</p>
+              <p><strong>Job Title:</strong> {contact.jobTitle}</p>
+              <p><strong>Company:</strong> {contact.company}</p>
+              <p><strong>Date of Birth:</strong> {contact.dob}</p>
+              <p><strong>Quote to live by:</strong> {contact.quote}</p>
+            </div>
+          </div>
+        ))}
 
-  if (contacts.length > 0) {
-    return <div>
-   
-   {successMessage && (
-        <div className="success-message-container">
-          <p className="success-message">{successMessage}</p>
-        </div>
-      )}
-
-    {contacts.map(renderContactCard)}
-      {isModalVisible && contactToDelete && (
-        <DeleteConfirmationModal
-          contactName={contactToDelete.name} // Pass contactName here
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
-        />
-      )}
-    </div>;
+        {isModalVisible && contactToDelete && (
+          <DeleteConfirmationModal
+            contactName={contactToDelete.name}
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+          />
+        )}
+      </div>
+    );
   }
 
   return <div>No contacts found.</div>;
-
 };
 
 export default ContactDetails;

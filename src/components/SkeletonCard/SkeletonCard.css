@@ -1,0 +1,26 @@
+.skeleton-card {
+    background: #f0f0f0;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .skeleton-header {
+    width: 150px;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  
+  .skeleton-body .skeleton-line {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .skeleton-body .skeleton-line:last-child {
+    width: 80%;
+  }
+  
