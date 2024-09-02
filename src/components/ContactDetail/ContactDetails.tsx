@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
@@ -26,7 +26,10 @@ const ContactDetails: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
+    // Reference for the horizontal scroll container
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -103,6 +106,38 @@ const ContactDetails: React.FC = () => {
   };
 
 
+  const handleScrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -300,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 300,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const nextSlide = () => {
+    if (contacts) {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % contacts.length);
+    }
+  };
+
+  const prevSlide = () => {
+    if (contacts) {
+      setCurrentSlide(
+        (prevSlide) => (prevSlide - 1 + contacts.length) % contacts.length
+      );
+    }
+  };
+
   if (loading) {
     // Rendering multiple skeleton loaders while loading
     return (
@@ -119,50 +154,98 @@ const ContactDetails: React.FC = () => {
     return <p>{error}</p>;
   }
 
-  if (contacts && contacts.length > 0) {
-    return (
-      <div>
+
+  if (!contacts || contacts.length === 0) {
+    return <div>No contacts found.</div>;
+  }
+
+      // Get the indices for the three cards to display
+  const prevIndex = (currentSlide - 1 + contacts.length) % contacts.length;
+  const nextIndex = (currentSlide + 1) % contacts.length;
+
+  return (
+
+
+    <div className="slider-container">
         {successMessage && (
           <div className="success-message-container">
             <p className="success-message">{successMessage}</p>
           </div>
         )}
+      <section id="slider" className="slider">
+        <div className="carousel">
+          <div className="card prev">
+            <div className='card-header-contact-detail'>
+             <h2>{contacts[prevIndex].name}</h2>
+             <i
+            className="bi bi-person-fill-slash delete-icon icon-large"
+            onClick={() => handleDeleteClick(contacts[prevIndex])}
+            title="Delete Contact"
+          ></i>
+            </div>
+            <p><strong>Phone:</strong> {contacts[prevIndex].phone}</p>
+            <p><strong>Email:</strong> {contacts[prevIndex].email}</p>
+            <p><strong>Address:</strong> {contacts[prevIndex].address}</p>
+            <p><strong>Job Title:</strong> {contacts[prevIndex].jobTitle}</p>
+            <p><strong>Company:</strong> {contacts[prevIndex].company}</p>
+            <p><strong>Date of Birth:</strong> {contacts[prevIndex].dob}</p>
+            <p><strong>Quote to live by:</strong> {contacts[prevIndex].quote}</p>
+          </div>
+          <div className="card active">
+          <div className='card-header-contact-detail'>
+            <h2>{contacts[currentSlide].name}</h2>
+            <i
+            className="bi bi-person-fill-slash delete-icon icon-large"
+            onClick={() => handleDeleteClick(contacts[currentSlide])}
+            title="Delete Contact"
+          ></i>
+            </div>
+            <p><strong>Phone:</strong> {contacts[currentSlide].phone}</p>
+            <p><strong>Email:</strong> {contacts[currentSlide].email}</p>
+            <p><strong>Address:</strong> {contacts[currentSlide].address}</p>
+            <p><strong>Job Title:</strong> {contacts[currentSlide].jobTitle}</p>
+            <p><strong>Company:</strong> {contacts[currentSlide].company}</p>
+            <p><strong>Date of Birth:</strong> {contacts[currentSlide].dob}</p>
+            <p><strong>Quote to live by:</strong> {contacts[currentSlide].quote}</p>
+          </div>
+          <div className="card next">
+            <div className='card-header-contact-detail'>
 
-        {contacts.map((contact,index) => (
-          <div className="card" key={contact._id}>
-
-            <div className="card-header">
-              <h2>{contact.name}</h2>
+              <h2>{contacts[nextIndex].name}</h2>
               <i
-                className="bi bi-person-fill-slash delete-icon icon-large"
-                onClick={() => handleDeleteClick(contact)}
-                title="Delete Contact"
+              className="bi bi-person-fill-slash delete-icon icon-large"
+              onClick={() => handleDeleteClick(contacts[nextIndex])}
+              title="Delete Contact"
               ></i>
             </div>
-            <div className="card-body">
-              <p><strong>Phone:</strong> {contact.phone}</p>
-              <p><strong>Email:</strong> {contact.email}</p>
-              <p><strong>Address:</strong> {contact.address}</p>
-              <p><strong>Job Title:</strong> {contact.jobTitle}</p>
-              <p><strong>Company:</strong> {contact.company}</p>
-              <p><strong>Date of Birth:</strong> {contact.dob}</p>
-              <p><strong>Quote to live by:</strong> {contact.quote}</p>
-            </div>
+            <p><strong>Phone:</strong> {contacts[nextIndex].phone}</p>
+            <p><strong>Email:</strong> {contacts[nextIndex].email}</p>
+            <p><strong>Address:</strong> {contacts[nextIndex].address}</p>
+            <p><strong>Job Title:</strong> {contacts[nextIndex].jobTitle}</p>
+            <p><strong>Company:</strong> {contacts[nextIndex].company}</p>
+            <p><strong>Date of Birth:</strong> {contacts[nextIndex].dob}</p>
+            <p><strong>Quote to live by:</strong> {contacts[nextIndex].quote}</p>
           </div>
-        ))}
+        </div>
 
-        {isModalVisible && contactToDelete && (
+        <button className="nav-button left" onClick={prevSlide} aria-label="Previous Slide">
+          &#10094;
+        </button>
+        <button className="nav-button right" onClick={nextSlide} aria-label="Next Slide">
+          &#10095;
+        </button>
+      </section>
+
+      {isModalVisible && contactToDelete && (
           <DeleteConfirmationModal
             contactName={contactToDelete.name}
             onConfirm={handleConfirmDelete}
             onCancel={handleCancelDelete}
           />
         )}
-      </div>
-    );
-  }
 
-  return <div>No contacts found.</div>;
+    </div>
+  );
 };
 
 export default ContactDetails;
