@@ -1,41 +1,21 @@
-import React, { useRef } from 'react';
-import { extend, useThree, useFrame, ReactThreeFiber } from "@react-three/fiber";
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
-import * as THREE from 'three';
-
-// Extend THREE to include TrackballControls
-extend({ TrackballControls });
-
-// Extend the JSX IntrinsicElements to include trackballControls
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      trackballControls: ReactThreeFiber.Object3DNode<TrackballControls, typeof TrackballControls>;
-    }
-  }
-}
+import React from 'react';
+import { OrbitControls } from '@react-three/drei/native';
+import { useThree } from '@react-three/fiber';
 
 const Controls: React.FC = () => {
-  const controls = useRef<TrackballControls | null>(null);
   const { camera, gl } = useThree();
 
-  useFrame(() => {
-    if (controls.current) {
-      controls.current.update();
-    }
-  });
-
   return (
-    <trackballControls
-      ref={controls}
+    <OrbitControls
       args={[camera, gl.domElement]}
-      dynamicDampingFactor={0.1}
-      keys={['18', '17', '91']} // ALT_KEY, CTRL_KEY, CMD_KEY
-      mouseButtons={{
-        LEFT: THREE.MOUSE.PAN,
-        MIDDLE: THREE.MOUSE.DOLLY, // or use MIDDLE if you want middle mouse button for zoom
-        RIGHT: THREE.MOUSE.ROTATE,
-      }}
+      enableDamping
+      dampingFactor={0.25}
+      rotateSpeed={0.5}
+      zoomSpeed={1.2}
+      panSpeed={0.8}
+      enableZoom={true}
+      enablePan={true}
+      enableRotate={true}
     />
   );
 };
