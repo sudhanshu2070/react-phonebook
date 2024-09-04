@@ -5,6 +5,8 @@ import AddContact from './components/AddContact/AddContact';
 import ContactDetails from './components/ContactDetail/ContactDetails';
 import { AnimatePresence } from 'framer-motion';
 import Transitions from './components/Transition/Transition'; // Import your Transitions component
+import Experience from './components/Experience/Experience';
+import ThreePointVis from './components/ThreePointVis/ThreePointVis';
 //import{ contacts }from './data/contact-detail'; to fetch the data locally saved in the .ts file
 
 
@@ -28,6 +30,9 @@ const AnimatedRoutes: React.FC = () => {
           <Route path="/contact/:name" element={ <Transitions> <ContactDetails /> </Transitions>} />
           {/*handling the case where no contact name is provided */}
           <Route path="/contact/" element={ <Transitions> <ContactDetails /> </Transitions> } />
+
+          <Route path="/cool-stuff/" element={ <Transitions> <Experience /> </Transitions> } />
+          <Route path="/cool-stuff-1/" element={ <Transitions>  <ThreePointVis /> </Transitions> } />
         </Routes>
       </AnimatePresence>
   );

@@ -1,0 +1,15 @@
+/* Experience.css */
+.some-class {
+    width: 100%;
+    height: 100vh; /* Make the canvas full height */
+    display: block; /* Ensure the canvas is displayed as a block element */
+    background-color: #000; /* Set a background color, black in this case */
+    cursor: grab; /* Change cursor to a grabbing hand to indicate interactivity */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .some-class:active {
+    cursor: grabbing; /* Change cursor when actively dragging */
+  }
+  
