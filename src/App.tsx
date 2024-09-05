@@ -10,7 +10,7 @@ import ThreePointVis from './components/ThreePointVis/ThreePointVis/ThreePointVi
 import './components/ThreePointVis/ThreePointVis/ThreePointVis.css';
 //import{ contacts }from './data/contact-detail'; to fetch the data locally saved in the .ts file
 
-const data = new Array(96).fill(0).map((d, id) => ({ id }));
+const data = new Array(112).fill(0).map((d, id) => ({ id }));
 
 const App: React.FC = () => {
   return (
@@ -33,7 +33,13 @@ const AnimatedRoutes: React.FC = () => {
           {/*handling the case where no contact name is provided */}
           <Route path="/contact/" element={ <Transitions> <ContactDetails /> </Transitions> } />
 
-          <Route path="/cool-stuff/" element={ <Transitions> <Experience /> </Transitions> } />
+          <Route path="/cool-stuff/" element={ 
+            <div className='main-threePointVis-container'>
+            <div className='threePointVis-container'> 
+            <Experience/> 
+            </div>
+            </div>  
+            } />
           <Route path="/cool-stuff-1/" element={ 
             <div className='main-threePointVis-container'>
             <div className='threePointVis-container'> 

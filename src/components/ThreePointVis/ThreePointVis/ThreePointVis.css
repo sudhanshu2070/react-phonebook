@@ -4,6 +4,7 @@
     position: relative;
     padding: 16px;
     box-sizing: border-box;
+    background: repeating-linear-gradient(to top, #ff7a33, #33a0ff 3px);
 }
 .threePointVis-container {
     /* width: 100vw !important;
