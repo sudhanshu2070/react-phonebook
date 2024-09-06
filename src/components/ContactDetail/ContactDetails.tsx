@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
@@ -27,9 +27,6 @@ const ContactDetails: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-
-    // Reference for the horizontal scroll container
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -105,24 +102,6 @@ const ContactDetails: React.FC = () => {
     setContactToDelete(null);
   };
 
-
-  const handleScrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -300,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const handleScrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 300,
-        behavior: 'smooth',
-      });
-    }
-  };
 
   const nextSlide = () => {
     if (contacts) {

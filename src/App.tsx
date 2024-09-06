@@ -10,7 +10,7 @@ import ThreePointVis from './components/ThreePointVis/ThreePointVis/ThreePointVi
 import './components/ThreePointVis/ThreePointVis/ThreePointVis.css';
 //import{ contacts }from './data/contact-detail'; to fetch the data locally saved in the .ts file
 
-const data = new Array(112).fill(0).map((d, id) => ({ id }));
+const data = new Array(390).fill(0).map((d, id) => ({ id }));
 
 const App: React.FC = () => {
   return (
