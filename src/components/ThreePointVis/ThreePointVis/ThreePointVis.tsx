@@ -4,7 +4,6 @@ import Controls from '../Controls';
 import './ThreePointVis.css';
 import * as THREE from 'three';
 import { shaderMaterial } from '@react-three/drei/native';
-//import { Raycaster } from 'three';
 
 // Custom shader material to simulate a gradient effect
 const GradientMaterial = shaderMaterial(
@@ -62,7 +61,6 @@ const ThreePointVis: React.FC<ThreePointVisProps> = ({ data }) => {
   const [hoveredCylinder, setHoveredCylinder] = useState<number | null>(null);
 
   return (
-    
     <Canvas camera={{ position: [0, 0, 5] }}>
       <Controls />
       <ambientLight color="#ffffff" intensity={0.1} />
