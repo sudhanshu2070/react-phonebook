@@ -4,6 +4,7 @@ import axios from 'axios';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import './ContactDetails.css'; // Import the CSS file
+import { color } from 'framer-motion';
 
 interface Contact {
   _id: string;
@@ -142,20 +143,17 @@ const ContactDetails: React.FC = () => {
   const prevIndex = (currentSlide - 1 + contacts.length) % contacts.length;
   const nextIndex = (currentSlide + 1) % contacts.length;
 
-  const contactDtlBgImg = "./images/philippe-mignot.jpg";
+  // using url(${contactDtlBgImg}) inside the style attribute in JSX,
+  // the relative path like ./images/tim-navis.jpg is interpreted relative to the JavaScript file location,
+  // not relative to the public folder.
+
+  const contactDtlBgImg = `${process.env.PUBLIC_URL}/images/man-76.jpg`;
+  const prevCardBgImg = `${process.env.PUBLIC_URL}/images/bruno-guerrero.jpg`; //unsplash
+  const activeCardBgImg = `${process.env.PUBLIC_URL}/images/painting-48.jpg`;
+  const nextCardBgImg = `${process.env.PUBLIC_URL}/images/samuel-berner.jpg`;
 
   return (
-    <div className="slider-container"
-    style={{
-      backgroundImage: `url(${contactDtlBgImg})`,
-      backgroundAttachment: 'fixed',
-      backgroundSize: 'cover',
-      height: '100vh',
-      width: '100%',
-      padding: '20px',
-      boxSizing: 'border-box',
-    }}
-    >
+    <div className="slider-container" style={{ backgroundImage: `url(${contactDtlBgImg})`}}>
         {successMessage && (
           <div className="success-message-container">
             <p className="success-message">{successMessage}</p>
@@ -167,9 +165,9 @@ const ContactDetails: React.FC = () => {
 
       <section id="slider" className="slider">
         <div className="carousel" >
-          <div className="card prev">
+          <div className="card prev" style={{backgroundImage: `url(${prevCardBgImg})`}}>
             <div className='card-header-contact-detail'>
-             <h2>{contacts[prevIndex].name}</h2>
+             <h2 style={{color:"#f0f0f0"}}>{contacts[prevIndex].name}</h2>
              <i
             className="bi bi-person-fill-slash delete-icon icon-large"
             onClick={() => handleDeleteClick(contacts[prevIndex])}
@@ -184,7 +182,7 @@ const ContactDetails: React.FC = () => {
             <p><strong>Date of Birth:</strong> {contacts[prevIndex].dob}</p>
             <p><strong>Quote to live by:</strong> {contacts[prevIndex].quote}</p>
           </div>
-          <div className="card active">
+          <div className="card active" style={{backgroundImage: `url(${activeCardBgImg})`}}>
           <div className='card-header-contact-detail'>
             <h2>{contacts[currentSlide].name}</h2>
             <i
@@ -201,10 +199,10 @@ const ContactDetails: React.FC = () => {
             <p><strong>Date of Birth:</strong> {contacts[currentSlide].dob}</p>
             <p><strong>Quote to live by:</strong> {contacts[currentSlide].quote}</p>
           </div>
-          <div className="card next">
+          <div className="card next" style={{backgroundImage: `url(${nextCardBgImg})`}}>
             <div className='card-header-contact-detail'>
 
-              <h2>{contacts[nextIndex].name}</h2>
+              <h2 style={{color:"#f0f0f0"}}>{contacts[nextIndex].name}</h2>
               <i
               className="bi bi-person-fill-slash delete-icon icon-large"
               onClick={() => handleDeleteClick(contacts[nextIndex])}
