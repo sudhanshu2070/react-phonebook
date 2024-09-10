@@ -142,17 +142,31 @@ const ContactDetails: React.FC = () => {
   const prevIndex = (currentSlide - 1 + contacts.length) % contacts.length;
   const nextIndex = (currentSlide + 1) % contacts.length;
 
+  const contactDtlBgImg = "./images/philippe-mignot.jpg";
+
   return (
-
-
-    <div className="slider-container">
+    <div className="slider-container"
+    style={{
+      backgroundImage: `url(${contactDtlBgImg})`,
+      backgroundAttachment: 'fixed',
+      backgroundSize: 'cover',
+      height: '100vh',
+      width: '100%',
+      padding: '20px',
+      boxSizing: 'border-box',
+    }}
+    >
         {successMessage && (
           <div className="success-message-container">
             <p className="success-message">{successMessage}</p>
           </div>
         )}
+
+      <h2 className="contact-details-title">View Contact Details</h2>
+
+
       <section id="slider" className="slider">
-        <div className="carousel">
+        <div className="carousel" >
           <div className="card prev">
             <div className='card-header-contact-detail'>
              <h2>{contacts[prevIndex].name}</h2>
