@@ -31,7 +31,7 @@
   width: 26.5%;
   
   height: 75vh;
-  /* max-height: 75vh; */
+  max-height: 75vh;
   
   border-radius: 7px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -50,31 +50,11 @@
   background-position: center;
 }
 
-.quote-text {
-  overflow-y: auto; 
-}
-
-.quote-text::-webkit-scrollbar {
-  width: 12px; /* Scrollbar width */
-}
-
-.quote-text::-webkit-scrollbar-thumb {
-  background-color: #191919; /* Scrollbar color */
-  border-radius: 5px;
-}
-
-.quote-text::-webkit-scrollbar-thumb:hover {
-  background: repeating-linear-gradient(to top, #C73659, #A91D3A 3px);
-}
-
 .card.active {
   transform: scale(1.05) translateZ(0);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   opacity: 1; /* Full opacity for the active card */
   z-index: 3; /* On top */
-
-  overflow-y: auto;
-
   background-size: cover;
   background-position: center;
 }
@@ -212,4 +192,21 @@
   font-size: 27px; 
   font-style: italic; 
   letter-spacing: 1px; 
+}
+
+.quote-text {
+  overflow-y: auto; 
+}
+
+.quote-text::-webkit-scrollbar {
+  width: 12px; /* Scrollbar width */
+}
+
+.quote-text::-webkit-scrollbar-thumb {
+  background-color: #191919; /* Scrollbar color */
+  border-radius: 5px;
+}
+
+.quote-text::-webkit-scrollbar-thumb:hover {
+  background: repeating-linear-gradient(to top, #C73659, #A91D3A 3px);
 }
