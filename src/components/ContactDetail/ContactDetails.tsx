@@ -4,7 +4,6 @@ import axios from 'axios';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import './ContactDetails.css'; // Import the CSS file
-import { color } from 'framer-motion';
 
 interface Contact {
   _id: string;
@@ -27,6 +26,7 @@ const ContactDetails: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -79,13 +79,12 @@ const ContactDetails: React.FC = () => {
       setContacts(contacts?.filter(contact => contact._id !== id) || null);
       setIsModalVisible(false);
        setSuccessMessage('Contact deleted successfully.');
-       setTimeout(() => setSuccessMessage(null), 3000); // Hide message after 3 seconds
+       setTimeout(() => setSuccessMessage(null), 3000); // Hiding message after 3 seconds
     } catch (error) {
       console.error('Error deleting contact:', error);
       setError('Failed to delete the contact.');
     }
   };
-
 
   const handleDeleteClick = (contact: Contact) => {
     setContactToDelete(contact);
@@ -93,8 +92,23 @@ const ContactDetails: React.FC = () => {
   };
 
   const handleConfirmDelete = () => {
-    if (contactToDelete) {
+    if (contactToDelete && contacts) {
       deleteContact(contactToDelete._id);
+
+    // Updating the contacts array after the deletion
+    const updatedContacts = contacts.filter((c) => c._id !== contactToDelete._id);
+    setContacts(updatedContacts);
+
+    if (updatedContacts.length === 0) {
+      // If no contacts are left
+      setCurrentSlide(0);
+    } else if (currentSlide >= updatedContacts.length) {
+      // If we're at the last contact, moving to the last available contact
+      setCurrentSlide(updatedContacts.length - 1);
+    } else {
+      // Otherwise, keeping the current index or moving to the next slide
+      setCurrentSlide((prevSlide) => prevSlide % updatedContacts.length);
+    }
     }
   };
 
@@ -105,13 +119,13 @@ const ContactDetails: React.FC = () => {
 
 
   const nextSlide = () => {
-    if (contacts) {
+    if (contacts && contacts.length > 0) {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % contacts.length);
     }
   };
 
   const prevSlide = () => {
-    if (contacts) {
+    if (contacts && contacts.length > 0) {
       setCurrentSlide(
         (prevSlide) => (prevSlide - 1 + contacts.length) % contacts.length
       );
@@ -180,7 +194,7 @@ const ContactDetails: React.FC = () => {
             <p><strong>Job Title:</strong> {contacts[prevIndex].jobTitle}</p>
             <p><strong>Company:</strong> {contacts[prevIndex].company}</p>
             <p><strong>Date of Birth:</strong> {contacts[prevIndex].dob}</p>
-            <p><strong>Quote to live by:</strong> {contacts[prevIndex].quote}</p>
+            <p className="quote-text"><strong>Quote to live by:</strong> {contacts[prevIndex].quote}</p>
           </div>
           <div className="card active" style={{backgroundImage: `url(${activeCardBgImg})`}}>
           <div className='card-header-contact-detail'>
@@ -197,7 +211,7 @@ const ContactDetails: React.FC = () => {
             <p><strong>Job Title:</strong> {contacts[currentSlide].jobTitle}</p>
             <p><strong>Company:</strong> {contacts[currentSlide].company}</p>
             <p><strong>Date of Birth:</strong> {contacts[currentSlide].dob}</p>
-            <p><strong>Quote to live by:</strong> {contacts[currentSlide].quote}</p>
+            <p className="quote-text"><strong>Quote to live by:</strong> {contacts[currentSlide].quote}</p>
           </div>
           <div className="card next" style={{backgroundImage: `url(${nextCardBgImg})`}}>
             <div className='card-header-contact-detail'>
@@ -215,14 +229,14 @@ const ContactDetails: React.FC = () => {
             <p><strong>Job Title:</strong> {contacts[nextIndex].jobTitle}</p>
             <p><strong>Company:</strong> {contacts[nextIndex].company}</p>
             <p><strong>Date of Birth:</strong> {contacts[nextIndex].dob}</p>
-            <p><strong>Quote to live by:</strong> {contacts[nextIndex].quote}</p>
+            <p className="quote-text"><strong>Quote to live by:</strong> {contacts[nextIndex].quote}</p>
           </div>
         </div>
 
-        <button className="nav-button left" onClick={prevSlide} aria-label="Previous Slide">
+        <button className="nav-button left" onClick={prevSlide} aria-label="Previous Slide" title="Previous Contact">
           &#10094;
         </button>
-        <button className="nav-button right" onClick={nextSlide} aria-label="Next Slide">
+        <button className="nav-button right" onClick={nextSlide} aria-label="Next Slide" title="Next Contact">
           &#10095;
         </button>
       </section>

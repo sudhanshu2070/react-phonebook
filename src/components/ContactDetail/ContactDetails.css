@@ -24,12 +24,15 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  perspective: 1000px; /* Creates the 3D effect */
+  perspective: 1000px; /* for the 3D effect */
 }
 
 .card {
   width: 26.5%;
-  /* background-color: #fff; */
+  
+  height: 75vh;
+  /* max-height: 75vh; */
+  
   border-radius: 7px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -42,9 +45,26 @@
   text-align: left;
   z-index: 1;
 
-  margin: 0 7px; /* Add horizontal space between cards */
+  margin: 0 7px; /* horizontal space between cards */
   background-size: cover;
   background-position: center;
+}
+
+.quote-text {
+  overflow-y: auto; 
+}
+
+.quote-text::-webkit-scrollbar {
+  width: 12px; /* Scrollbar width */
+}
+
+.quote-text::-webkit-scrollbar-thumb {
+  background-color: #191919; /* Scrollbar color */
+  border-radius: 5px;
+}
+
+.quote-text::-webkit-scrollbar-thumb:hover {
+  background: repeating-linear-gradient(to top, #C73659, #A91D3A 3px);
 }
 
 .card.active {
@@ -52,6 +72,8 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   opacity: 1; /* Full opacity for the active card */
   z-index: 3; /* On top */
+
+  overflow-y: auto;
 
   background-size: cover;
   background-position: center;
@@ -65,9 +87,9 @@
   background-size: cover;
   background-position: center;
 
-    /* Overlay for background image */
+  /* Overlay for background image */
   position: relative;
-  color: #f0f0f0; /* Change the header as well*/
+  color: #f0f0f0;
 }
 
 .card-header-contact-detail {
@@ -89,24 +111,34 @@
 
 .nav-button {
   position: absolute;
-  width: 10%;
+  width: 6%;
+  height: 8%; 
+  line-height: 60%;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border: none;
-  font-size: 24px;
+  background: repeating-linear-gradient(to right, #8DECB4, #7ED7C1 3px);
+  opacity: 0.8;
+  color: #1C1427;
+  border: 2px solid #31363F; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(83, 162, 190, 0.5); /* Soft shadow with a glow */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 7.5px;
+  font-size: 25px;
   cursor: pointer;
-  padding: 10px;
   z-index: 1;
 }
 
 .nav-button.left {
-  left: 10px;
+  left: 46px;
 }
 
 .nav-button.right {
-  right: 10px;
+  right: 46px;
+}
+.nav-button:hover {
+  border: 2px solid #F6F5F2;
+  background: repeating-linear-gradient(to right, #3C2A21, #1A120B 3px);
+  color: #F3F8FF;
 }
 
 
@@ -116,30 +148,30 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  padding: 0 10px; /* Add padding if needed */
-  position: relative; /* Ensure proper positioning of elements */
+  padding: 0 10px; 
+  position: relative; 
 }
 
 .card-header-contact-detail h2 {
-  margin: 0 auto; /* Center the text horizontally */
+  margin: 0 auto; 
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font-size: 1.5rem; /* Adjust as needed */
+  font-size: 1.5rem; 
 }
 
 .delete-icon {
   cursor: pointer;
   color: red;
-  font-size: 1.5rem; /* Adjust size as needed */
+  font-size: 1.75rem; 
   position: relative;
   margin-left: auto;
   z-index: 1;
 }
 
 .delete-icon:hover {
-  color: darkred;
+  color: #e5dcc5;
 }
 
 /* Success message container */
@@ -152,28 +184,32 @@
 
 /* Success message box */
 .success-message {
-  background-color: #4caf50; /* Green background */
-  color: #fff; /* White text */
+  background-color: #4caf50;
+  color: #fff; 
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 16px;
   font-weight: bold;
-  animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-out 2.5s; /* Animation for appearance and disappearance */
+  animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-out 2.5s;
 }
 
 .contact-details-title {
  
   position: absolute;
-  top: 20px; /* Adjust this value to control the distance from the top */
-  left: 20px; /* Adjust this value to control the distance from the left */
-  font-size: 24px; /* You can adjust the font size as needed */
-  color: #333;
-  z-index: 100; /* Ensure it stays above other elements */
+  top: 20px; 
+  left: 20px; 
+  color: #e5dcc5;
+  z-index: 100; 
   margin: 0;
   padding: 10px;
-  background: repeating-linear-gradient(to right, #EEEEEE, #76ABAE 3px);
-  background-color: rgba(255, 255, 255, 0.8); /* Optional: add a background for better visibility */
-  border-radius: 8px; /* Optional: round the corners */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow */
+  border-radius: 7px;
+  background: repeating-linear-gradient(to bottom, #4c4c47, #969a97 3px);
+  border-radius: 8px; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+
+  font-family: 'Papyrus'; 
+  font-size: 27px; 
+  font-style: italic; 
+  letter-spacing: 1px; 
 }
