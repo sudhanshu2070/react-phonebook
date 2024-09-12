@@ -222,7 +222,7 @@ const ContactDetails: React.FC = () => {
           <div className='card-header-contact-detail'>
             <h2>{contacts[currentSlide].name}</h2>
             <i
-            className="bi bi-person-fill-slash delete-icon icon-large"
+            className="bi bi-person-fill-slash delete-icon-active icon-large"
             onClick={() => handleDeleteClick(contacts[currentSlide])}
             title="Delete Contact"
           ></i>

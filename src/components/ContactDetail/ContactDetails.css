@@ -62,19 +62,46 @@
   z-index: 3; /* On top */
   background-size: cover;
   background-position: center;
+  border: 2.8px solid #362222;
+}
+
+.card.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6%;
+  height: 100%;
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.6), /* Dark inner shadow for depth */
+              inset -3px -3px 8px rgba(255, 255, 255, 0.3); /* Light inner shadow for highlight */
+  pointer-events: none; /* Ensures it doesn’t affect interaction */
 }
 
 .card.prev, .card.next {
-
-  transform: scale(0.9) translateZ(-50px);
+  transform: scale(0.85) translateZ(-50px);
   z-index: 2; /* On top */
-
   background-size: cover;
   background-position: center;
-
   /* Overlay for background image */
   position: relative;
   color: #f0f0f0;
+  border: 2.5px solid #48CFCB;
+}
+
+.card.prev{
+    transform: scale(0.75) rotateY(10deg) rotateZ(-7deg); 
+}
+
+.card.prev:hover{
+  transform: scale(0.9);
+} 
+
+.card.next{
+  transform: scale(0.75) rotateY(-10deg) rotateZ(7deg); 
+}
+
+.card.next:hover {
+transform: scale(0.9);
 }
 
 .card-header-contact-detail {
@@ -154,10 +181,10 @@
 
 .nav-button {
   position: absolute;
-  width: 6%;
+  width: 5%;
   height: 8%; 
   line-height: 60%;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   background: repeating-linear-gradient(to right, #8DECB4, #7ED7C1 3px);
   opacity: 0.8;
@@ -169,19 +196,30 @@
   font-size: 25px;
   cursor: pointer;
   z-index: 1;
-}
+  }
 
 .nav-button.left {
   left: 46px;
+  transform: rotateZ(-8deg);
+}
+
+.nav-button.left:hover {
+  border: 2px solid #F6F5F2;
+  background: repeating-linear-gradient(to right, #3C2A21, #1A120B 3px);
+  color: #F3F8FF;
+  transform: scale(1.1) rotateZ(-8deg);
 }
 
 .nav-button.right {
   right: 46px;
+  transform: rotateZ(8deg);
 }
-.nav-button:hover {
+
+.nav-button.right:hover {
   border: 2px solid #F6F5F2;
   background: repeating-linear-gradient(to right, #3C2A21, #1A120B 3px);
   color: #F3F8FF;
+  transform: scale(1.1) rotateZ(8deg);
 }
 
 .card-header-contact-detail {
@@ -210,17 +248,36 @@
   0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.delete-icon {
+.delete-icon{
   cursor: pointer;
-  color: red;
-  font-size: 1.75rem; 
+  color: #e0e0e0;
+  font-size: 1.90rem; 
   position: relative;
   margin-left: auto;
+  margin-bottom: 5px;
+  text-shadow: 1px 1px 2px #191919, 0 0 1em #3E3232, 0 0 0.2em #222831;
   z-index: 1;
 }
 
-.delete-icon:hover {
+.delete-icon-active {
+  cursor: pointer;
+  color: #660000;
+  font-size: 1.90rem; 
+  position: relative;
+  margin-left: auto;
+  margin-bottom: 5px;
+  text-shadow: 1px 1px 2px #191919, 0 0 1em #3E3232, 0 0 0.2em #222831;
+  z-index: 1;
+}
+
+.delete-icon-active:hover {
   color: #e5dcc5;
+  transform: scale(1.5);
+}
+
+.delete-icon:hover {
+  color: #758694;
+  transform: scale(1.5);
 }
 
 /* Success message container */
@@ -244,7 +301,6 @@
 }
 
 .contact-details-title {
- 
   position: absolute;
   top: 20px; 
   left: 20px; 
