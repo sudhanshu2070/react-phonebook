@@ -179,7 +179,7 @@ const ContactDetails: React.FC = () => {
 
       <section id="slider" className="slider">
         <div className="carousel" >
-          <div className="card prev" style={{backgroundImage: `url(${prevCardBgImg})`}}>
+          <div className="card prev" style={{backgroundImage: `url(${prevCardBgImg})`}} onClick={() => setCurrentSlide(prevIndex)}>
             <div className='card-header-contact-detail'>
              <h2 style={{color:"#f0f0f0"}}>{contacts[prevIndex].name}</h2>
              <i
@@ -187,16 +187,38 @@ const ContactDetails: React.FC = () => {
             onClick={() => handleDeleteClick(contacts[prevIndex])}
             title="Delete Contact"
           ></i>
-            </div>
-            <p><strong>Phone:</strong> {contacts[prevIndex].phone}</p>
-            <p><strong>Email:</strong> {contacts[prevIndex].email}</p>
-            <p><strong>Address:</strong> {contacts[prevIndex].address}</p>
-            <p><strong>Job Title:</strong> {contacts[prevIndex].jobTitle}</p>
-            <p><strong>Company:</strong> {contacts[prevIndex].company}</p>
-            <p><strong>Date of Birth:</strong> {contacts[prevIndex].dob}</p>
-            <p className="quote-text"><strong>Quote to live by:</strong> {contacts[prevIndex].quote}</p>
-          </div>
-          <div className="card active" style={{backgroundImage: `url(${activeCardBgImg})`}}>
+        </div>
+          <p>
+            <span className="header-text-prev"><strong>Phone:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].phone}</span>
+          </p>
+          <p> 
+            <span className="header-text-prev"><strong>Email:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].email}</span>
+          </p>  
+          <p>
+            <span className="header-text-prev"><strong>Address:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].address}</span>
+          </p>
+          <p>
+            <span className="header-text-prev"><strong>Job Title:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].jobTitle}</span>
+          </p>
+          <p>
+            <span className="header-text-prev"><strong>Company:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].company}</span>
+          </p>
+          <p>
+            <span className="header-text-prev"><strong>Date of Birth:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].dob}</span>
+          </p>
+          <p className="quote-text">
+            <span className="header-text-prev"><strong>Quote to live by:</strong></span> 
+            <span className="content-text-prev">{contacts[prevIndex].quote}</span>
+          </p>
+        </div>
+
+          <div className="card active" style={{backgroundImage: `url(${activeCardBgImg})`}} onClick={() => setCurrentSlide(currentSlide)}>
           <div className='card-header-contact-detail'>
             <h2>{contacts[currentSlide].name}</h2>
             <i
@@ -204,16 +226,38 @@ const ContactDetails: React.FC = () => {
             onClick={() => handleDeleteClick(contacts[currentSlide])}
             title="Delete Contact"
           ></i>
-            </div>
-            <p><strong>Phone:</strong> {contacts[currentSlide].phone}</p>
-            <p><strong>Email:</strong> {contacts[currentSlide].email}</p>
-            <p><strong>Address:</strong> {contacts[currentSlide].address}</p>
-            <p><strong>Job Title:</strong> {contacts[currentSlide].jobTitle}</p>
-            <p><strong>Company:</strong> {contacts[currentSlide].company}</p>
-            <p><strong>Date of Birth:</strong> {contacts[currentSlide].dob}</p>
-            <p className="quote-text"><strong>Quote to live by:</strong> {contacts[currentSlide].quote}</p>
-          </div>
-          <div className="card next" style={{backgroundImage: `url(${nextCardBgImg})`}}>
+        </div>
+          <p>
+            <span className="header-text-active"><strong>Phone:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].phone}</span>
+          </p>
+          <p>
+            <span className="header-text-active"><strong>Email:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].email}</span>
+          </p>
+          <p>
+            <span className="header-text-active"><strong>Address:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].address}</span>
+          </p>
+          <p>
+            <span className="header-text-active"><strong>Job Title:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].jobTitle}</span>
+          </p>
+          <p>
+            <span className="header-text-active"><strong>Company:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].company}</span>
+          </p>
+          <p>
+            <span className="header-text-active"><strong>Date of Birth:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].dob}</span>
+          </p>
+          <p className="quote-text">
+            <span className="header-text-active"><strong>Quote to live by:</strong></span> 
+            <span className="content-text-active">{contacts[currentSlide].quote}</span>
+          </p>
+        </div>
+
+          <div className="card next" style={{backgroundImage: `url(${nextCardBgImg})`}} onClick={() => setCurrentSlide(nextIndex)}>
             <div className='card-header-contact-detail'>
 
               <h2 style={{color:"#f0f0f0"}}>{contacts[nextIndex].name}</h2>
@@ -222,14 +266,35 @@ const ContactDetails: React.FC = () => {
               onClick={() => handleDeleteClick(contacts[nextIndex])}
               title="Delete Contact"
               ></i>
-            </div>
-            <p><strong>Phone:</strong> {contacts[nextIndex].phone}</p>
-            <p><strong>Email:</strong> {contacts[nextIndex].email}</p>
-            <p><strong>Address:</strong> {contacts[nextIndex].address}</p>
-            <p><strong>Job Title:</strong> {contacts[nextIndex].jobTitle}</p>
-            <p><strong>Company:</strong> {contacts[nextIndex].company}</p>
-            <p><strong>Date of Birth:</strong> {contacts[nextIndex].dob}</p>
-            <p className="quote-text"><strong>Quote to live by:</strong> {contacts[nextIndex].quote}</p>
+          </div>
+            <p>
+              <span className="header-text-next"><strong>Phone:</strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].phone}</span>
+            </p>
+            <p>
+              <span className="header-text-next"><strong>Email:</strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].email}</span>
+            </p>
+            <p>
+              <span className="header-text-next"><strong>Address:</strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].address}</span>
+            </p>
+            <p>
+              <span className="header-text-next"><strong>Job Title:</strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].jobTitle}</span>
+            </p>
+            <p>
+              <span className="header-text-next"><strong>Company:</strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].company}</span>
+            </p>
+            <p>
+              <span className="header-text-next"><strong>Date of Birth:</strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].dob}</span>
+            </p>
+            <p className="quote-text">
+              <span className="header-text-next"><strong>Quote to live by: </strong></span> 
+              <span className="content-text-next">{contacts[nextIndex].quote}</span>
+            </p>
           </div>
         </div>
 

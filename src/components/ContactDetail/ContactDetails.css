@@ -27,12 +27,15 @@
   perspective: 1000px; /* for the 3D effect */
 }
 
+.card p {
+  margin: 2.5%;
+  padding: 0.5%;
+}
+
 .card {
   width: 26.5%;
-  
   height: 75vh;
   max-height: 75vh;
-  
   border-radius: 7px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -46,8 +49,10 @@
   z-index: 1;
 
   margin: 0 7px; /* horizontal space between cards */
+  margin-bottom: 15px; 
   background-size: cover;
   background-position: center;
+  align-items: left;
 }
 
 .card.active {
@@ -89,6 +94,64 @@
   color: #333;
 }
 
+.header-text-prev {
+  font-family: 'Garamond'; 
+  font-size: 17px;
+  letter-spacing: 0.6px; 
+  font-style: italic;
+  text-shadow: 1px 1px 2px #FF005C, 0 0 1em #810034, 0 0 0.2em #26001B;
+  margin-right: 10px;
+}
+
+.header-text-active {
+  font-family: 'Garamond';
+  font-style: italic;
+  font-weight: bold;
+  font-size: 19px;
+  letter-spacing: 0.7px; 
+  text-shadow: 1px 1px 2px #000000, 0 0 1em #97FEED, 0 0 0.2em #F6F1E9;
+  margin-right: 10px;
+}
+
+.header-text-next {
+  font-family: 'Garamond'; 
+  font-size: 17px;
+  letter-spacing: 0.6px; 
+  font-style: italic;
+  text-shadow: 1px 1px 2px #FF005C, 0 0 1em #810034, 0 0 0.2em #26001B;
+  margin-right: 10px;
+}
+
+.content-text-prev {
+  font-family: 'Bradley Hand ITC', cursive; 
+  font-size: 17px;
+  text-shadow: 1px 1px 2px #1A3636, 0 0 1em #40534C, 0 0 0.2em #677D6A;
+  text-align: center;
+}
+
+.content-text-active {
+  /* font-family: 'Garamond';  */
+  font-family: 'Mistral', cursive; 
+  /* font-family: 'Ink Free', cursive;  */
+  font-weight: 200;
+  font-size: 19px;
+  letter-spacing: 0.6px; 
+  color:#000000;
+  text-align: center;
+
+  background: linear-gradient(45deg, #212529, #343a40, #495057);
+  filter: brightness(2.5); 
+  -webkit-background-clip: text; 
+  background-clip: text;
+}
+
+.content-text-next {
+  font-family: 'Bradley Hand ITC', cursive; 
+  font-size: 17px;
+  text-shadow: 1px 1px 2px #1A3636, 0 0 1em #40534C, 0 0 0.2em #677D6A;
+  text-align: center;
+}
+
 .nav-button {
   position: absolute;
   width: 6%;
@@ -100,7 +163,7 @@
   opacity: 0.8;
   color: #1C1427;
   border: 2px solid #31363F; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(83, 162, 190, 0.5); /* Soft shadow with a glow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(83, 162, 190, 0.5); 
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   border-radius: 7.5px;
   font-size: 25px;
@@ -121,7 +184,6 @@
   color: #F3F8FF;
 }
 
-
 .card-header-contact-detail {
   display: flex;
   position: relative;
@@ -136,9 +198,16 @@
   margin: 0 auto; 
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotateX(10deg);
   text-align: center;
-  font-size: 1.5rem; 
+  font-size: 1.4rem; 
+  font-weight: bold; 
+  letter-spacing: 1.5px; 
+  font-family: 'Goudy Stout'; 
+  /* font-family: 'Broadway';  */
+  text-shadow: 
+  1px 1px 2px rgba(0, 0, 0, 0.3),
+  0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .delete-icon {
@@ -164,7 +233,7 @@
 
 /* Success message box */
 .success-message {
-  background-color: #4caf50;
+  background: repeating-linear-gradient(to right, #4c4c47, #969a97 3px);
   color: #fff; 
   padding: 15px;
   border-radius: 5px;
@@ -191,7 +260,7 @@
   font-family: 'Papyrus'; 
   font-size: 27px; 
   font-style: italic; 
-  letter-spacing: 1px; 
+  letter-spacing: 1px;
 }
 
 .quote-text {
@@ -199,7 +268,7 @@
 }
 
 .quote-text::-webkit-scrollbar {
-  width: 12px; /* Scrollbar width */
+  width: 5px; /* Scrollbar width */
 }
 
 .quote-text::-webkit-scrollbar-thumb {
