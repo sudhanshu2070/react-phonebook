@@ -96,6 +96,10 @@
   transform: scale(0.9);
 } 
 
+.card.prev:hover ~ .nav-button.left {
+  display: none;
+}
+
 .card.next{
   transform: scale(0.75) rotateY(-10deg) rotateZ(7deg); 
 }

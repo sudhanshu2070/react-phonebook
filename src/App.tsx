@@ -8,6 +8,8 @@ import Transitions from './components/Transition/Transition'; // Import your Tra
 import Experience from './components/Experience/Experience';
 import ThreePointVis from './components/ThreePointVis/ThreePointVis/ThreePointVis';
 import './components/ThreePointVis/ThreePointVis/ThreePointVis.css';
+import Login from './components/Login/Login';
+import SignUp from './components/SignUp/SignUp';
 //import{ contacts }from './data/contact-detail'; to fetch the data locally saved in the .ts file
 
 const data = new Array(390).fill(0).map((d, id) => ({ id }));
@@ -27,7 +29,7 @@ const AnimatedRoutes: React.FC = () => {
   return (
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Transitions> <Home /></Transitions> }/>
+          <Route path="/home" element={<Transitions> <Home /></Transitions> }/>
           <Route path="/add-contact" element={ <Transitions> <AddContact /> </Transitions> } />
           <Route path="/contact/:name" element={ <Transitions> <ContactDetails /> </Transitions>} />
           {/*handling the case where no contact name is provided */}
@@ -47,6 +49,10 @@ const AnimatedRoutes: React.FC = () => {
             </div>
             </div>  
             } />
+
+          <Route path="/" element={ <Transitions><Login /></Transitions> } />
+          <Route path="/signup" element={ <Transitions><SignUp /></Transitions> } />  
+
         </Routes>
       </AnimatePresence>
   );

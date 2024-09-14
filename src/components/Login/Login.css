@@ -1,0 +1,77 @@
+/* Container to center the login box */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4e6c5;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  /* Styling the login box */
+  .login-box {
+    background: #f9dcb8;
+    border: 4px solid #7b3e19;
+    padding: 40px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+  }
+  
+  /* Title style with retro font */
+  .login-title {
+    font-size: 28px;
+    color: #7b3e19;
+    text-shadow: 2px 2px 2px #c9ab87;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling input fields and labels */
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group input {
+    max-width: 350px;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #7b3e19;
+    border-radius: 5px;
+    background-color: #f9ebde;
+    color: #573a1f;
+  }
+  
+  /* Button style with retro colors */
+  .login-button {
+    max-width: 120px;
+    width: 100%;
+    padding: 10px;
+    background-color: #7b3e19;
+    color: #f9ebde;
+    border: 2px solid #573a1f;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-button:hover {
+    background-color: #9c5033;
+  }
+  
+  /* Text for signup and link styling */
+  .signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #573a1f;
+  }
+  
+  .signup-link {
+    color: #7b3e19;
+    text-decoration: underline;
+  }
+  
+  .signup-link:hover {
+    color: #9c5033;
+  }
+  
