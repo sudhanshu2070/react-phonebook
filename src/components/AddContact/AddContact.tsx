@@ -36,7 +36,7 @@ const AddContact: React.FC = () => {
       setSuccessMessage('Contact added successfully.');
       setTimeout(() => {
         setSuccessMessage(null);
-        navigate('/'); // Navigate after hiding the message
+        navigate('/home'); // Navigate after hiding the message
       }, 1000); // Delay navigation for 1 seconds to allow message to be visible
     } catch (error) {
       console.error("There was an error adding the contact!", error);

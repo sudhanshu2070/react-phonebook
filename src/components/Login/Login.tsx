@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'; 
+import axios from 'axios';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,14 +19,22 @@ const Login: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login form data:', formData);
-    // Add logic for submitting form data to the server
 
-    navigate('/home');
+    try {
+      // Make a POST request to the backend for login
+      const response = await axios.post('http://localhost:5000/api/login', formData);
+      alert('Login successful');
+      // Optionally, save the token in localStorage or state management
+      localStorage.setItem('token', response.data.token);
+      navigate('/home'); // Redirect to home page
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Invalid credentials, please try again.');
+    }
   };
-
+  
   return (
     <div className="login-container">
       <div className="login-box">

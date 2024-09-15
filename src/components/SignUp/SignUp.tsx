@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.css'; 
+import axios from 'axios';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,12 +22,18 @@ const SignUp: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('SignUp form data:', formData);
-    // Add logic for submitting form data to the server
 
-    navigate('/home');
+    try {
+      // Make a POST request to the backend
+      await axios.post('http://localhost:5000/api/signup', formData);
+      alert('User registered successfully');
+      navigate('/'); // Redirect to the login page
+    } catch (error) {
+      console.error('Error signing up:', error);
+      alert('Error during registration, please try again.');
+    }
   };
 
   return (
