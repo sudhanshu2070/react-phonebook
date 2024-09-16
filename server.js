@@ -3,7 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();// #SOS (keep this at top)
+
 const bcrypt = require('bcryptjs');  // For hashing passwords
+
 const jwt = require('jsonwebtoken'); // For issuing tokens
 
 const app = express();
